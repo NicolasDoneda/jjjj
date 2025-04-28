@@ -1,15 +1,16 @@
   import React, { useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import Header from '../components/Header';
 
 const images = [
-  require('./assets/ds1Rem.jpg'),
-  require('./assets/ds2sotfs.jpg'),
-  require('./assets/eldenring.jpg'),
-  require('./assets/sekiro.png'),
-  require('./assets/eldenringplay.jpg'),
-  require('./assets/gaelds3.jpg'),
-  require('./assets/gwynboss.jpg'),
-  require('./assets/haimeds2.jpg'),
+  require('../assets/productsImages/ds1Rem.jpg'),
+  require('../assets/Homeimages/ds2sotfs.jpg'),
+  require('../assets/productsImages/eldenring.jpg'),
+  require('../assets/productsImages/sekiro.png'),
+  require('../assets/AboutImages/eldenringplay.jpg'),
+  require('../assets/AboutImages/gaelds3.jpg'),
+  require('../assets/AboutImages/gwynboss.jpg'),
+  require('../assets/AboutImages/haimeds2.jpg'),
 ];
 
 const GalleryScreen = () => {
@@ -29,9 +30,9 @@ const GalleryScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.logoContainer}>
-        <TouchableOpacity onPress={() => abrirModal(require('./assets/logo.png'))}>
+        <TouchableOpacity onPress={() => abrirModal(require('../assets/Homeimages/logo.png'))}>
           <Image
-            source={require('./assets/logo.png')}
+            source={require('../assets/Homeimages/logo.png')}
             style={styles.logo}
             resizeMode="contain"
           />
