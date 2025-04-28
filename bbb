@@ -118,4 +118,21 @@ const styles = StyleSheet.create({
   },
 });
 
+<FlatList
+  data={images}
+  keyExtractor={(item, index) => index.toString()}
+  numColumns={2} // 2 colunas
+  renderItem={({ item }) => (
+    <TouchableOpacity onPress={() => abrirModal(item)}>
+      <Image source={item} style={styles.thumbnail} />
+    </TouchableOpacity>
+  )}
+  contentContainerStyle={styles.galleryContainer}
+/>
+
+
+
+
+
+
 export default GalleryScreen;
