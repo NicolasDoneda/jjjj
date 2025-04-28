@@ -1,0 +1,126 @@
+import React, { useState } from 'react';
+import { View, Text, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import Header from '../components/Header';
+
+const images = [
+  require('../assets/productsImages/ds1Rem.jpg'),
+  require('../assets/Homeimages/ds2sotfs.jpg'),
+  require('../assets/productsImages/eldenring.jpg'),
+  require('../assets/productsImages/sekiro.png'),
+  require('../assets/AboutImages/eldenringplay.jpg'),
+  require('../assets/AboutImages/gaelds3.jpg'),
+  require('../assets/AboutImages/gwynboss.jpg'),
+  require('../assets/AboutImages/haimeds2.jpg'),
+  // Adicione mais imagens conforme necessário
+];
+
+const GalleryScreen = () => {
+  const [modalVisivel, setModalVisivel] = useState(false);
+  const [imagemSelecionada, setImagemSelecionada] = useState(null);
+
+  const abrirModal = (imagem) => {
+    setImagemSelecionada(imagem);
+    setModalVisivel(true);
+  };
+
+  const fecharModal = () => {
+    setModalVisivel(false);
+    setImagemSelecionada(null);
+  };
+
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.logoContainer}>
+        <TouchableOpacity onPress={() => abrirModal(require('../assets/Homeimages/logo.png'))}>
+          <Image
+            source={require('../assets/Homeimages/logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.title}>Imagens dos jogos</Text>
+
+      <View style={styles.galleryContainer}>
+        {images.map((item, index) => (
+          <TouchableOpacity key={index} onPress={() => abrirModal(item)}>
+            <Image source={item} style={styles.thumbnail} resizeMode="cover" />
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Modal
+        visible={modalVisivel}
+        transparent={true}
+        animationType="fade"
+      >
+        <View style={styles.modalBackground}>
+          <TouchableOpacity style={styles.closeArea} onPress={fecharModal}>
+            {imagemSelecionada && (
+              <Image source={imagemSelecionada} style={styles.fullImage} resizeMode="contain" />
+            )}
+            <Text style={styles.closeText}>Fechar</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#18191a',
+  },
+  logoContainer: {
+    marginTop: 40,
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 20,
+  },
+  logo: {
+    width: 230,
+    height: 130,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    color: '#fff',
+  },
+  galleryContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    paddingBottom: 20,
+  },
+  thumbnail: {
+    width: 150,
+    height: 150,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fullImage: {
+    width: '90%',
+    height: '70%',
+  },
+  closeArea: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closeText: {
+    color: 'white',
+    marginTop: 20,
+    fontSize: 18,
+  },
+});
+
+export default GalleryScreen;
