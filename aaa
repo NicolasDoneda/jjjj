@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import { View, Image, TouchableOpacity, Modal, StyleSheet, Text } from 'react-native';
+
+export default function App() {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const imageUrl = 'https://via.placeholder.com/300'; // Coloque aqui a URL da sua imagem
+
+  return (
+    <View style={styles.container}>
+      {/* Imagem que ao clicar abre o modal */}
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <Image source={{ uri: imageUrl }} style={styles.thumbnail} />
+      </TouchableOpacity>
+
+      {/* Modal para mostrar a imagem grande */}
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="fade"
+      >
+        <View style={styles.modalBackground}>
+          <TouchableOpacity style={styles.closeArea} onPress={() => setModalVisible(false)}>
+            <Image source={{ uri: imageUrl }} style={styles.fullImage} resizeMode="contain" />
+            <Text style={styles.closeText}>Fechar</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </View>
+  );
+}
+
+// Estilos
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  thumbnail: {
+    width: 150,
+    height: 150,
+    borderRadius: 8
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.9)',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  fullImage: {
+    width: '90%',
+    height: '70%',
+  },
+  closeArea: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closeText: {
+    color: 'white',
+    marginTop: 20,
+    fontSize: 18,
+  },
+});
