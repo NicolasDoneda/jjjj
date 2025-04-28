@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity, Modal } from 'react-native';
-import Header from '../components/Header';
+  import React, { useState } from 'react';
+import { View, Text, Image, ScrollView, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 
 const images = [
-  require('../assets/productsImages/ds1Rem.jpg'),
-  require('../assets/Homeimages/ds2sotfs.jpg'),
-  require('../assets/productsImages/eldenring.jpg'),
-  require('../assets/productsImages/sekiro.png'),
-  require('../assets/AboutImages/eldenringplay.jpg'),
-  require('../assets/AboutImages/gaelds3.jpg'),
-  require('../assets/AboutImages/gwynboss.jpg'),
-  require('../assets/AboutImages/haimeds2.jpg'),
-  // Adicione mais imagens conforme necessário
+  require('./assets/ds1Rem.jpg'),
+  require('./assets/ds2sotfs.jpg'),
+  require('./assets/eldenring.jpg'),
+  require('./assets/sekiro.png'),
+  require('./assets/eldenringplay.jpg'),
+  require('./assets/gaelds3.jpg'),
+  require('./assets/gwynboss.jpg'),
+  require('./assets/haimeds2.jpg'),
 ];
 
 const GalleryScreen = () => {
@@ -31,9 +29,9 @@ const GalleryScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.logoContainer}>
-        <TouchableOpacity onPress={() => abrirModal(require('../assets/Homeimages/logo.png'))}>
+        <TouchableOpacity onPress={() => abrirModal(require('./assets/logo.png'))}>
           <Image
-            source={require('../assets/Homeimages/logo.png')}
+            source={require('./assets/logo.png')}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -43,18 +41,14 @@ const GalleryScreen = () => {
       <Text style={styles.title}>Imagens dos jogos</Text>
 
       <View style={styles.galleryContainer}>
-        {images.map((item, index) => (
-          <TouchableOpacity key={index} onPress={() => abrirModal(item)}>
-            <Image source={item} style={styles.thumbnail} resizeMode="cover" />
+        {images.map((img, index) => (
+          <TouchableOpacity key={index} onPress={() => abrirModal(img)}>
+            <Image source={img} style={styles.thumbnail} />
           </TouchableOpacity>
         ))}
       </View>
 
-      <Modal
-        visible={modalVisivel}
-        transparent={true}
-        animationType="fade"
-      >
+      <Modal visible={modalVisivel} transparent={true} animationType="fade">
         <View style={styles.modalBackground}>
           <TouchableOpacity style={styles.closeArea} onPress={fecharModal}>
             {imagemSelecionada && (
